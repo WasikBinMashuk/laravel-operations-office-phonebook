@@ -34,7 +34,8 @@ class PhoneBookController extends Controller
             'mobile' => $request->mobile,
             'address' => $request->address,
             'status' => $request->status,
-            'ownerId' => $request->ownerId
+            'ownerId' => $request->ownerId,
+            'favourate' => $request->favourate
         ]);
 
         return Redirect()->back()->with('msg', 'Contact created successfuly');
@@ -85,7 +86,7 @@ class PhoneBookController extends Controller
         return redirect()->route('phonebook.index')->with('msg', 'Contact deleted successfuly');
     }
 
-    // favourate
+    // favourate contacts
 
     public function favourate()
     {

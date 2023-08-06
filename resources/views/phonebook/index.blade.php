@@ -127,6 +127,9 @@
                           {{-- Passing the owner id hidden --}}
                           <input type="hidden" value="{{ Auth::user()->id }}" name="ownerId">
 
+                          {{-- Favourite default input --}}
+                          <input type="hidden" value="0" name="favourate">
+
                           <div class="d-grid mb-2">
                             <input type="submit" class="btn btn-primary" value="ADD">
                           </div>

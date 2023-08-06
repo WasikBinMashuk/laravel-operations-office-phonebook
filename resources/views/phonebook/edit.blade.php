@@ -143,6 +143,8 @@
                           {{-- Passing the owner id hidden --}}
                           {{-- <input type="show" value="{{ Auth::user()->id }}" name="ownerId"> --}}
 
+                          
+
                           <div class="d-grid mb-2">
                             <input type="submit" class="btn btn-primary" value="ADD">
                           </div>
