@@ -37,7 +37,7 @@
                             <th scope="col">Mobile</th>
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
-                            <th scope="col">favourite</th>
+                            {{-- <th scope="col">favourite</th> --}}
                             <th scope="col"></th>
                             <th scope="col"></th>
                             
@@ -47,7 +47,11 @@
                           @foreach ($phonebooks as $item)
                               <tr>
                                 <td>{{ $item->id }}</td>
-                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->name }}
+                                    @if ($item->favourite == '1')
+                                        <i class="fa-solid fa-star" style="color: #eba000;"></i> 
+                                    @endif
+                                </td>
                                 <td>{{ $item->mobile }}</td>
                                 <td>{{ $item->address }}</td>
                                 <td>
@@ -59,11 +63,11 @@
                                         
                                     @endif
                                 </td>
-                                <td>
+                                {{-- <td>
                                     @if ($item->favourite == '1')
                                         <span class="badge bg-warning">Favourite</span> 
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td><a class="btn btn-outline-success btn-sm" href="{{ route('phonebook.edit', $item->id) }}">Edit</a></td>
                                 <td><a class="btn btn-outline-danger btn-sm" href="{{ route('phonebook.delete', $item->id) }}">Delete</a></td>
                               </tr>
