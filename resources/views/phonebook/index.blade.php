@@ -127,6 +127,13 @@
                               @error('status')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+
+                            {{-- <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <label for="status" class="form-label">Status</label>
+                                  <input type="checkbox" name="status" id="status" value="0" aria-label="Checkbox for following text input">
+                                </div>
+                            </div> --}}
                           </div>
 
                           {{-- Passing the owner id hidden --}}
