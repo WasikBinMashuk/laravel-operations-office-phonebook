@@ -13,11 +13,11 @@
                     </div>
                     
                     <div class="mt-2">
-                        <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="">Favourates</a></button>
+                        <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="">Favourites</a></button>
                     </div>
                 </div>
                 {{-- <div class="text-right">
-                    <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="">Favourates</a></button>
+                    <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="">favourites</a></button>
                 </div> --}}
 
                 <div class="card-body">
@@ -37,7 +37,7 @@
                             <th scope="col">Mobile</th>
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Favourate</th>
+                            <th scope="col">favourite</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                             
@@ -60,8 +60,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($item->favourate == '1')
-                                        <span class="badge bg-warning">Favourate</span> 
+                                    @if ($item->favourite == '1')
+                                        <span class="badge bg-warning">Favourite</span> 
                                     @endif
                                 </td>
                                 <td><a class="btn btn-outline-success btn-sm" href="{{ route('phonebook.edit', $item->id) }}">Edit</a></td>

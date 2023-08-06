@@ -14,7 +14,7 @@
                     </div>
                     
                     <div class="mt-2">
-                        <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.fav') }}">Favourates</a></button>
+                        <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.fav') }}">favourites</a></button>
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@
                             <th scope="col">Mobile</th>
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Favourate</th>
+                            <th scope="col">favourite</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                             
@@ -58,8 +58,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($item->favourate == '1')
-                                        <span class="badge bg-warning">Favourate</span> 
+                                    @if ($item->favourite == '1')
+                                        <span class="badge bg-warning">Favourite</span> 
                                     @endif
                                 </td>
                                 <td><a class="btn btn-outline-success btn-sm" href="{{ route('phonebook.edit', $item->id) }}">Edit</a></td>
@@ -127,13 +127,13 @@
 
                           @if ($editPhoneBooks->status == 1)
                             <div class="mb-3">
-                                <label for="favourate" class="form-label">Favourate</label>
-                                <select class="form-select" name="favourate" id="favourate">
-                                    <option selected disabled>Make Favourate</option>
-                                    <option value="0" {{ old('favourate', $editPhoneBooks->favourate) == '0' ? 'selected' : '' }}>Unfavourate</option>
-                                    <option value="1" {{ old('favourate', $editPhoneBooks->favourate) == '1' ? 'selected' : '' }} >Favourate</option>
+                                <label for="favourite" class="form-label">favourite</label>
+                                <select class="form-select" name="favourite" id="favourite">
+                                    <option selected disabled>Make favourite</option>
+                                    <option value="0" {{ old('favourite', $editPhoneBooks->favourite) == '0' ? 'selected' : '' }}>Unfavourite</option>
+                                    <option value="1" {{ old('favourite', $editPhoneBooks->favourite) == '1' ? 'selected' : '' }} >Favourite</option>
                                 </select>
-                                @error('favourate')
+                                @error('favourite')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

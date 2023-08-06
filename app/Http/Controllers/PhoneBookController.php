@@ -35,7 +35,7 @@ class PhoneBookController extends Controller
             'address' => $request->address,
             'status' => $request->status,
             'ownerId' => $request->ownerId,
-            'favourate' => $request->favourate
+            'favourite' => $request->favourite
         ]);
 
         return Redirect()->back()->with('msg', 'Contact created successfuly');
@@ -60,7 +60,7 @@ class PhoneBookController extends Controller
             'mobile' => 'required|max:11',
             'address' => 'required',
             'status' => 'required|in:0,1',
-            'favourate' => 'required|in:0,1',
+            'favourite' => 'required|in:0,1',
         ]);
 
         $phonebook = PhoneBook::where('id', $request->id)->first();
@@ -70,7 +70,7 @@ class PhoneBookController extends Controller
             'mobile' => $request->mobile,
             'address' => $request->address,
             'status' => $request->status,
-            'favourate' => $request->favourate,
+            'favourite' => $request->favourite,
             // 'ownerId' => $request->ownerId
         ]);
 
@@ -86,16 +86,16 @@ class PhoneBookController extends Controller
         return redirect()->route('phonebook.index')->with('msg', 'Contact deleted successfuly');
     }
 
-    // favourate contacts
+    // favourite contacts
 
-    public function favourate()
+    public function favourite()
     {
 
         $phonebooks = PhoneBook::latest()
-                    ->where('favourate', '=', 1)
+                    ->where('favourite', '=', 1)
                     ->Where('ownerId', '=', Auth::user()->id)
                     ->paginate();
 
-        return view('phonebook.favourates',compact('phonebooks'));
+        return view('phonebook.favourites',compact('phonebooks'));
     }
 }

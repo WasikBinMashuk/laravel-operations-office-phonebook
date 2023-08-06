@@ -14,11 +14,11 @@
                     </div>
                     
                     <div class="mt-2">
-                        <button type="" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.fav') }}">Favourates</a></button>
+                        <button type="" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.fav') }}">Favourites</a></button>
                     </div>
                 </div>
                 {{-- <div class="text-right">
-                    <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="">Favourates</a></button>
+                    <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="">favourites</a></button>
                 </div> --}}
 
                 <div class="card-body">
@@ -38,7 +38,7 @@
                             <th scope="col">Mobile</th>
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Favourate</th>
+                            <th scope="col">favourite</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                             
@@ -61,8 +61,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if ($item->favourate == '1')
-                                        <span class="badge bg-warning">Favourate</span> 
+                                    @if ($item->favourite == '1')
+                                        <span class="badge bg-warning">Favourite</span> 
                                     @endif
                                 </td>
                                 <td><a class="btn btn-outline-success btn-sm" href="{{ route('phonebook.edit', $item->id) }}">Edit</a></td>
@@ -115,9 +115,9 @@
                           <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
                             <select class="form-select" name="status" id="status">
-                                <option selected disabled>Select status</option>
+                                <option disabled>Select status</option>
                                 <option value="0" >Public</option>
-                                <option value="1" >Private</option>
+                                <option selected value="1" >Private</option>
                               </select>
                               @error('status')
                                 <span class="text-danger">{{ $message }}</span>
@@ -128,7 +128,7 @@
                           <input type="hidden" value="{{ Auth::user()->id }}" name="ownerId">
 
                           {{-- Favourite default input --}}
-                          <input type="hidden" value="0" name="favourate">
+                          <input type="hidden" value="0" name="favourite">
 
                           <div class="d-grid mb-2">
                             <input type="submit" class="btn btn-primary" value="ADD">
