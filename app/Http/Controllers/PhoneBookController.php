@@ -1,0 +1,93 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\PhoneBook;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+class PhoneBookController extends Controller
+{
+    public function index()
+    {
+        // $phonebooks = PhoneBook::latest()->paginate(10);
+
+        $phonebooks = PhoneBook::latest()
+                    ->where('status', '=', 0)
+                    ->orWhere('ownerId', '=', Auth::user()->id)
+                    ->paginate();
+
+        // $phonebooks = DB::select('select * from phonebooks where ownerId = status AND status = 0', [1]);
+
+        return view('phonebook.index',compact('phonebooks'));
+    }
+
+    public function store(Request $request){
+       
+        $request->validate([
+            'name' => 'required',
+            'mobile' => 'required|max:11',
+            'address' => 'required',
+            'status' => 'required|in:0,1'
+        ]);
+
+        PhoneBook::create([
+            'name' => $request->name,
+            'mobile' => $request->mobile,
+            'address' => $request->address,
+            'status' => $request->status,
+            'ownerId' => $request->ownerId
+        ]);
+
+        return Redirect()->back()->with('msg', 'Contact created successfuly');
+    }
+
+    public function edit($id){
+
+        $phonebooks = PhoneBook::latest()
+                    ->where('status', '=', 0)
+                    ->orWhere('ownerId', '=', Auth::user()->id)
+                    ->paginate();
+
+        $editPhoneBooks = PhoneBook::where('id', $id)->first();
+
+       
+
+        return view('phonebook.edit', compact('editPhoneBooks','phonebooks'));
+    }
+
+    public function update(Request $request){
+
+        $request->validate([
+            'name' => 'required',
+            'mobile' => 'required|max:11',
+            'address' => 'required',
+            'status' => 'required|in:0,1'
+        ]);
+
+        $phonebook = PhoneBook::where('id', $request->id)->first();
+        
+        $phonebook->update([
+            'name' => $request->name,
+            'mobile' => $request->mobile,
+            'address' => $request->address,
+            'status' => $request->status
+            // 'ownerId' => $request->ownerId
+        ]);
+
+        return redirect()->route('phonebook.index')->with('msg', 'Contact updated successfuly');
+    }
+
+    public function delete(Request $request){
+
+
+        $phonebook = PhoneBook::where('id', $request->id)->first();
+        
+        $phonebook->delete();
+
+        // DB::delete('delete from categories where id = ?',[$request->id]);
+
+        return redirect()->route('phonebook.index')->with('msg', 'Contact deleted successfuly');
+    }
+}
