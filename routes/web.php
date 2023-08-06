@@ -24,14 +24,13 @@ Route::get('/', function () {
 // Destroy session route
 Route::get('/destroy', [AuthController::class, 'destroy'])->name('destroy');
 
-Auth::routes();
-// Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
+// Auth::routes();
+Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
 
 // CRUD route
 Route::resource('companies', CompanyController::class);
 
 // PhoneBook routes
-
 Route::get('/phonebook', [PhoneBookController::class, 'index'])->name('phonebook.index');
 Route::post('/phonebook/store', [PhoneBookController::class, 'store'])->name('phonebook.store');
 Route::get('/phonebook/{id}/edit', [PhoneBookController::class, 'edit'])->name('phonebook.edit');

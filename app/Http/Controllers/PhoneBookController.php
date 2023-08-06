@@ -11,14 +11,11 @@ class PhoneBookController extends Controller
 {
     public function index()
     {
-        // $phonebooks = PhoneBook::latest()->paginate(10);
 
         $phonebooks = PhoneBook::latest()
                     ->where('status', '=', 0)
                     ->orWhere('ownerId', '=', Auth::user()->id)
                     ->paginate();
-
-        // $phonebooks = DB::select('select * from phonebooks where ownerId = status AND status = 0', [1]);
 
         return view('phonebook.index',compact('phonebooks'));
     }
@@ -52,8 +49,6 @@ class PhoneBookController extends Controller
 
         $editPhoneBooks = PhoneBook::where('id', $id)->first();
 
-       
-
         return view('phonebook.edit', compact('editPhoneBooks','phonebooks'));
     }
 
@@ -81,12 +76,9 @@ class PhoneBookController extends Controller
 
     public function delete(Request $request){
 
-
         $phonebook = PhoneBook::where('id', $request->id)->first();
         
         $phonebook->delete();
-
-        // DB::delete('delete from categories where id = ?',[$request->id]);
 
         return redirect()->route('phonebook.index')->with('msg', 'Contact deleted successfuly');
     }
