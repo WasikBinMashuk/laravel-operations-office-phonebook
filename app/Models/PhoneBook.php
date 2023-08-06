@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PhoneBook extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'mobile', 'address', 'status', 'ownerId'];
+    protected $fillable = ['name', 'mobile', 'address', 'status', 'ownerId','favourate'];
 }

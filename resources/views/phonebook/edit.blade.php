@@ -7,8 +7,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center">
-                    <h4>Phone Book</h4>
                     
+                    <a  style="text-decoration: none; color:black" href="{{ route('phonebook.index') }}"><h4>Phone Book</h4></a>
                     
                     <span style="float-right">Total <span class="badge text-bg-danger">{{ count($phonebooks) }}</span></span>
                     
@@ -32,6 +32,7 @@
                             <th scope="col">Mobile</th>
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Favourate</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                             
@@ -51,6 +52,11 @@
                                     @else
                                     <span class="badge bg-danger">Private</span>
                                         
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($item->favourate == '1')
+                                        <span class="badge bg-warning">Favourate</span> 
                                     @endif
                                 </td>
                                 <td><a class="btn btn-outline-success btn-sm" href="{{ route('phonebook.edit', $item->id) }}">Edit</a></td>
@@ -115,6 +121,21 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                           </div>
+
+                          @if ($editPhoneBooks->status == 1)
+                            <div class="mb-3">
+                                <label for="favourate" class="form-label">Favourate</label>
+                                <select class="form-select" name="favourate" id="favourate">
+                                    <option selected disabled>Make Favourate</option>
+                                    <option value="0" {{ old('favourate', $editPhoneBooks->favourate) == '0' ? 'selected' : '' }}>Unfavourate</option>
+                                    <option value="1" {{ old('favourate', $editPhoneBooks->favourate) == '1' ? 'selected' : '' }} >Favourate</option>
+                                </select>
+                                @error('favourate')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                          @endif
+                          
 
                           {{-- Passing the owner id hidden --}}
                           {{-- <input type="show" value="{{ Auth::user()->id }}" name="ownerId"> --}}

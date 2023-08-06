@@ -58,7 +58,8 @@ class PhoneBookController extends Controller
             'name' => 'required',
             'mobile' => 'required|max:11',
             'address' => 'required',
-            'status' => 'required|in:0,1'
+            'status' => 'required|in:0,1',
+            'favourate' => 'required|in:0,1',
         ]);
 
         $phonebook = PhoneBook::where('id', $request->id)->first();
@@ -67,7 +68,8 @@ class PhoneBookController extends Controller
             'name' => $request->name,
             'mobile' => $request->mobile,
             'address' => $request->address,
-            'status' => $request->status
+            'status' => $request->status,
+            'favourate' => $request->favourate,
             // 'ownerId' => $request->ownerId
         ]);
 
