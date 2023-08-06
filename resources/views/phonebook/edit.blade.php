@@ -6,13 +6,16 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-center">
+                <div class=" card-header justify-content-center text-center">
                     
-                    <a  style="text-decoration: none; color:black" href="{{ route('phonebook.index') }}"><h4>Phone Book</h4></a>
+                    <div>
+                        <a  style="text-decoration: none; color:black" href="{{ route('phonebook.index') }}"><h4>Phone Book</h4></a>
+                        <span style="float-right">Total <span class="badge text-bg-danger">{{ count($phonebooks) }}</span></span>
+                    </div>
                     
-                    <span style="float-right">Total <span class="badge text-bg-danger">{{ count($phonebooks) }}</span></span>
-                    
-                    
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.fav') }}">Favourates</a></button>
+                    </div>
                 </div>
 
                 <div class="card-body">

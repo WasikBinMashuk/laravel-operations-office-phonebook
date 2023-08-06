@@ -1,7 +1,6 @@
 @extends('layouts.companies')
 
 @section('companiesContent')
-
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
@@ -14,7 +13,7 @@
                     </div>
                     
                     <div class="mt-2">
-                        <button type="" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.fav') }}">Favourates</a></button>
+                        <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="">Favourates</a></button>
                     </div>
                 </div>
                 {{-- <div class="text-right">
@@ -73,65 +72,6 @@
                       </table>
     
                       {{ $phonebooks->links('pagination::bootstrap-5') }}
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header text-center pt-4">
-                    <h4>Add Contacts</h4>
-                    
-                </div>
-
-                <div class="card-body">
-                    
-                    <form action="{{ route('phonebook.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" value="{{ old('name') }}" name="name">
-                            @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-
-                          </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Mobile</label>
-                            <input type="text" class="form-control" id="mobile" value="{{ old('mobile') }}" name="mobile">
-                            @error('mobile')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-
-                          </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" value="{{ old('address') }}" name="address">
-                            @error('address')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-
-                          </div>
-                          <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-select" name="status" id="status">
-                                <option selected disabled>Select status</option>
-                                <option value="0" >Public</option>
-                                <option value="1" >Private</option>
-                              </select>
-                              @error('status')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                          </div>
-
-                          {{-- Passing the owner id hidden --}}
-                          <input type="hidden" value="{{ Auth::user()->id }}" name="ownerId">
-
-                          <div class="d-grid mb-2">
-                            <input type="submit" class="btn btn-primary" value="ADD">
-                          </div>
-                    </form>
-                    
                 </div>
             </div>
         </div>

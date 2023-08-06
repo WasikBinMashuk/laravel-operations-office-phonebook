@@ -84,4 +84,17 @@ class PhoneBookController extends Controller
 
         return redirect()->route('phonebook.index')->with('msg', 'Contact deleted successfuly');
     }
+
+    // favourate
+
+    public function favourate()
+    {
+
+        $phonebooks = PhoneBook::latest()
+                    ->where('favourate', '=', 1)
+                    ->Where('ownerId', '=', Auth::user()->id)
+                    ->paginate();
+
+        return view('phonebook.favourates',compact('phonebooks'));
+    }
 }

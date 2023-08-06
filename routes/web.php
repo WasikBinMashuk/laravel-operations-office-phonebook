@@ -37,6 +37,9 @@ Route::get('/phonebook/{id}/edit', [PhoneBookController::class, 'edit'])->name('
 Route::put('/phonebook/update', [PhoneBookController::class, 'update'])->name('phonebook.update');
 Route::get('/phonebook/{id}/delete', [PhoneBookController::class, 'delete'])->name('phonebook.delete');
 
+// Favourates contacts
+Route::get('/phonebook/favourates', [PhoneBookController::class, 'favourate'])->name('phonebook.fav');
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
