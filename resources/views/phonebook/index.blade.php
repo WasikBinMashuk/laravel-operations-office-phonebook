@@ -118,7 +118,7 @@
 
                           </div>
                           <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
+                            {{-- <label for="status" class="form-label">Status</label>
                             <select class="form-select" name="status" id="status">
                                 <option disabled>Select status</option>
                                 <option value="0" >Public</option>
@@ -126,15 +126,17 @@
                               </select>
                               @error('status')
                                 <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                            @enderror --}}
 
-                            {{-- <div class="input-group-prepend">
+                            <div class="input-group-prepend">
+                                
                                 <div class="input-group-text">
                                     
                                     <input type="checkbox" name="status" id="status" value="0" aria-label="Checkbox for following text input">
-                                    <label for="status" class="form-label">Public</label>
+                                    {{-- <label for="status" class="form-label">Public</label> --}}
+                                    <p class="pt-3 pl-1">Public</p>
                                 </div>
-                            </div> --}}
+                            </div>
                           </div>
 
                           {{-- Passing the owner id hidden --}}
@@ -153,5 +155,7 @@
         </div>
     </div>
 </div>
+
+
 
 @endsection

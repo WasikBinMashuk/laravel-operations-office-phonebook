@@ -21,19 +21,21 @@ class PhoneBookController extends Controller
     }
 
     public function store(Request $request){
+
+        // dd($request);
        
         $request->validate([
             'name' => 'required',
             'mobile' => 'required|max:11',
             'address' => 'required',
-            'status' => 'required|in:0,1'
+            'status' => 'nullable|in:0,1'
         ]);
 
         PhoneBook::create([
             'name' => $request->name,
             'mobile' => $request->mobile,
             'address' => $request->address,
-            'status' => $request->status,
+            'status' => $request->status ?? 1,
             'ownerId' => $request->ownerId,
             'favourite' => $request->favourite
         ]);
@@ -69,7 +71,7 @@ class PhoneBookController extends Controller
             'name' => $request->name,
             'mobile' => $request->mobile,
             'address' => $request->address,
-            'status' => $request->status,
+            'status' => $request->status ?? 0,
             'favourite' => $request->favourite,
             // 'ownerId' => $request->ownerId
         ]);

@@ -76,4 +76,6 @@
         @yield('companiesContent')
     </main>
 </body>
+
+
 </html>
