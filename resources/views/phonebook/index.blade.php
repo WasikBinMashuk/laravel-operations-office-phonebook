@@ -135,6 +135,10 @@
                                     <input type="checkbox" name="status" id="status" value="0" aria-label="Checkbox for following text input">
                                     {{-- <label for="status" class="form-label">Public</label> --}}
                                     <p class="pt-3 pl-1">Public</p>
+                                    
+                                    @error('status')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                           </div>
