@@ -103,7 +103,7 @@
 
                           </div>
                         <div class="mb-3">
-                            <label for="name" class="form-label">Mobile</label>
+                            <label for="mobile" class="form-label">Mobile</label>
                             <input type="text" class="form-control" id="mobile" value="{{ old('mobile', $editPhoneBooks->mobile) }}" name="mobile">
                             @error('mobile')
                                 <span class="text-danger">{{ $message }}</span>
