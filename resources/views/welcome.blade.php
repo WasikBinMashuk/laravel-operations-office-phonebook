@@ -28,6 +28,7 @@
                         <a href="{{ url('/companies') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
                     @else
                         <a href="{{ route('companies.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Companies</a>
+                        <a href="{{ route('phonebook.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Phone Book</a>
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline ml-4">Log in</a>
 
                         @if (Route::has('register'))

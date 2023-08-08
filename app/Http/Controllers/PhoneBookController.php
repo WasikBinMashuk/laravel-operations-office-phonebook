@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class PhoneBookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','admin.name.redirect']);
+        // $this->middleware('auth');
+    }
+    
     public function index()
     {
 
