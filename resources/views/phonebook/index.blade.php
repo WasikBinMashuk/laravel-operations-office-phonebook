@@ -144,37 +144,24 @@
                             @enderror
 
                           </div>
-                          <div class="mb-3">
-                            {{-- <label for="status" class="form-label">Status</label>
-                            <select class="form-select" name="status" id="status">
-                                <option disabled>Select status</option>
-                                <option value="0" >Public</option>
-                                <option selected value="1" >Private</option>
-                              </select>
-                              @error('status')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror --}}
-
-                            <div class="input-group-prepend">
-                                
-                                <div class="input-group-text">
-                                    
-                                    <input type="checkbox" name="status" id="status" value="0" aria-label="Checkbox for following text input">
-                                    {{-- <label for="status" class="form-label">Public</label> --}}
-                                    <p class="pt-3 pl-1">Public</p>
-                                    
-                                    @error('status')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
+                          
+                          <div class=" align-items-center input-group">
+                            
+                            <input  type="checkbox" id="status" name="status" value="0"> 
+                            <label class="px-1 pt-1" for="status">Public</label><br>
+                          </div>
+                          <div class="d-flex align-items-center input-group">
+                            <input type="checkbox" id="favourite" name="favourite" value="1">
+                            <label class="px-1 pt-1" for="favourite">Favourite</label><br>
                           </div>
 
+
+
+                          
                           {{-- Passing the owner id hidden --}}
                           <input type="hidden" value="{{ Auth::user()->id }}" name="ownerId">
-
                           {{-- Favourite default input --}}
-                          <input type="hidden" value="0" name="favourite">
+                          {{-- <input type="hidden" value="0" name="favourite"> --}}
 
                           <div class="d-grid mb-2">
                             <input type="submit" class="btn btn-primary" value="ADD">

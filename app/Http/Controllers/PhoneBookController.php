@@ -21,20 +21,33 @@ class PhoneBookController extends Controller
         $phonebooks = PhoneBook::latest()
                     ->where('status', '=', 0)
                     ->orWhere('ownerId', '=', Auth::user()->id)
-                    ->paginate();
+                    ->paginate(5);
 
         return view('phonebook.index',compact('phonebooks'));
     }
 
     public function store(Request $request){
 
-        // dd($request);
+        // dd($request->all());
+        $favourite = 0;
+        if (($request->status == 0 && $request->favourite == 1) || ($request->status == NULL && $request->favourite == 0)) {
+            $favourite = 0;
+        } 
+        
+        if ($request->status == NULL && $request->favourite == 1) {
+            $favourite = 1;
+        }
+        // if ($request->status == NULL && $request->favourite == 0) {
+        //     $favourite = 0;
+        // }
+        
        
         $request->validate([
             'name' => 'required',
             'mobile' => 'required|max:11',
             'address' => 'required',
-            'status' => 'nullable|in:0,1'
+            'status' => 'nullable|in:0,1',
+            // 'favourite' => 'required|in:0,1',
         ]);
 
         PhoneBook::create([
@@ -43,7 +56,9 @@ class PhoneBookController extends Controller
             'address' => $request->address,
             'status' => $request->status ?? 1,
             'ownerId' => $request->ownerId,
-            'favourite' => $request->favourite
+            // 'favourite' => $request->favourite ?? 0
+            'favourite' => $favourite
+
         ]);
 
         return Redirect()->back()->with('msg', 'Contact created successfuly');
