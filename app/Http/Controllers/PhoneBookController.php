@@ -30,16 +30,17 @@ class PhoneBookController extends Controller
 
         // dd($request->all());
         $favourite = 0;
-        if (($request->status == 0 && $request->favourite == 1) || ($request->status == NULL && $request->favourite == 0)) {
+        if ($request->status == "0" && $request->favourite == "1") {
             $favourite = 0;
+            // dd('dada');
+            return Redirect()->back()->with('danger', 'Public and Favourite cannot be selecetd at the same time. TRY AGAIN!!!');
         } 
-        
-        if ($request->status == NULL && $request->favourite == 1) {
+        if ($request->has('status') == true && $request->favourite == "1") {
             $favourite = 1;
         }
-        // if ($request->status == NULL && $request->favourite == 0) {
-        //     $favourite = 0;
-        // }
+        if ($request->has('status') == false && $request->favourite == "0") {
+            $favourite = 0;
+        }
         
        
         $request->validate([
