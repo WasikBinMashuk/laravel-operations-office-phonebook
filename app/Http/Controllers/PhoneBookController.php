@@ -70,7 +70,7 @@ class PhoneBookController extends Controller
         $phonebooks = PhoneBook::latest()
                     ->where('status', '=', 0)
                     ->orWhere('ownerId', '=', Auth::user()->id)
-                    ->paginate();
+                    ->paginate(5);
 
         $editPhoneBooks = PhoneBook::where('id', $id)->first();
 
@@ -118,7 +118,7 @@ class PhoneBookController extends Controller
         $phonebooks = PhoneBook::latest()
                     ->where('favourite', '=', 1)
                     ->Where('ownerId', '=', Auth::user()->id)
-                    ->paginate();
+                    ->paginate(5);
 
         return view('phonebook.favourites',compact('phonebooks'));
     }
