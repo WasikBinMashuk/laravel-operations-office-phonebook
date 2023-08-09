@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PhoneBook;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,12 +18,33 @@ class PhoneBookController extends Controller
     
     public function index()
     {
-
+        
         $phonebooks = PhoneBook::latest()
                     ->where('status', '=', 0)
                     ->orWhere('ownerId', '=', Auth::user()->id)
                     ->paginate(5);
 
+
+
+        // $authId = auth()->user()->id;
+        
+        // $phonebooks = PhoneBook::query()
+        //                 ->where('status', 0)
+        //                 ->orWhere('ownerId', $authId)
+        //                 ->paginate(5);
+    
+            
+        // // return $phonebooks;
+
+
+
+
+        // $phonebooks = PhoneBook::latest()
+        //     ->where('status', '=', 0)
+        //     ->orWhere('ownerId', '=', Auth::user()->id)
+        //     ->paginate(10);
+
+        // dd('check');
         return view('phonebook.index',compact('phonebooks'));
     }
 
@@ -35,11 +57,13 @@ class PhoneBookController extends Controller
             // dd('dada');
             return Redirect()->back()->with('danger', 'Public and Favourite cannot be selecetd at the same time. TRY AGAIN!!!');
         } 
-        if ($request->has('status') == true && $request->favourite == "1") {
-            $favourite = 1;
-        }
-        if ($request->has('status') == false && $request->favourite == "0") {
+        if ($request->has('status') == true && $request->favourite == "0") {
             $favourite = 0;
+            // dd('if 2');
+        }
+        if ($request->has('status') == false && $request->favourite == "1") {
+            $favourite = 1;
+            // dd('if 3');
         }
         
        

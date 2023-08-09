@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('status');
             $table->bigInteger('ownerId');
             $table->timestamps();
+            // $table->index('status')
         });
     }
 
