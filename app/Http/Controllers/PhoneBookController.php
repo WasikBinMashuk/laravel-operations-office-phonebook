@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PhoneBook;
+use App\Models\PhoneBookGroup;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,6 +51,8 @@ class PhoneBookController extends Controller
     public function store(Request $request){
 
         // dd($request->all());
+
+        // Public and Friend selection logic
         $favourite = 0;
         if ($request->status == "0" && $request->favourite == "1") {
             $favourite = 0;
@@ -74,7 +77,8 @@ class PhoneBookController extends Controller
             // 'favourite' => 'required|in:0,1',
         ]);
 
-        PhoneBook::create([
+        // creation
+        $phoneBook = PhoneBook::create([
             'name' => $request->name,
             'mobile' => $request->mobile,
             'address' => $request->address,
@@ -84,6 +88,17 @@ class PhoneBookController extends Controller
             'favourite' => $favourite
 
         ]);
+        
+        // Mark as Friend section
+        if($request->has('friend') == true){
+            // dd('friend');
+            PhoneBookGroup::create([
+                'user_id' => Auth::user()->id,
+                'phone_book_id' => $phoneBook -> id,
+                'friend' => $request->friend
+            ]);
+        }
+        
 
         return Redirect()->back()->with('msg', 'Contact created successfuly');
     }
@@ -134,9 +149,7 @@ class PhoneBookController extends Controller
     }
 
     // favourite contacts
-
-    public function favourite()
-    {
+    public function favourite() {
 
         $phonebooks = PhoneBook::latest()
                     ->where('favourite', '=', 1)

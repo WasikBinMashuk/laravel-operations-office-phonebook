@@ -18,6 +18,7 @@
                     </div> --}}
                     <div class="mt-2">
                         <button type="" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.index', ['favourite' => '1']) }}">Favourites</a></button>
+                        <button type="" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.index', ['friend' => '1']) }}">Friends</a></button>
                         
                         <button type="" class="btn btn-success mr-2"><a class="text-decoration-none " href="{{ route('phonebook.index') }}"><i class="fa-solid fa-rotate-right" style="color: #ffffff;"></i></a></button>
                         
@@ -166,6 +167,11 @@
                           <div class="d-flex align-items-center input-group">
                             <input type="checkbox" id="favourite" name="favourite" value="1">
                             <label class="px-1 pt-1" for="favourite">Favourite</label><br>
+                          </div>
+
+                          <div class="d-flex align-items-center input-group">
+                            <input type="checkbox" id="friend" name="friend" value="1">
+                            <label class="px-1 pt-1" for="friend">Mark as friend</label><br>
                           </div>
 
 
