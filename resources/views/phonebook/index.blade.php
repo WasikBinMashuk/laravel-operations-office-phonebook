@@ -13,9 +13,16 @@
                         <span style="float-right">Total <span class="badge text-bg-danger">{{ count($phonebooks) }}</span></span>
                     </div>
                     
-                    <div class="mt-2">
+                    {{-- <div class="mt-2">
                         <button type="" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.fav') }}">Favourites</a></button>
+                    </div> --}}
+                    <div class="mt-2">
+                        <button type="" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.index', ['favourite' => '1']) }}">Favourites</a></button>
+                        
+                        <button type="" class="btn btn-success mr-2"><a class="text-decoration-none " href="{{ route('phonebook.index') }}"><i class="fa-solid fa-rotate-right" style="color: #ffffff;"></i></a></button>
+                        
                     </div>
+                    
                 </div>
                 {{-- <div class="text-right">
                     <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="">favourites</a></button>

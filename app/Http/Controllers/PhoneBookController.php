@@ -16,36 +16,35 @@ class PhoneBookController extends Controller
         // $this->middleware('auth');
     }
     
-    public function index()
+    public function index(Request $request)
     {
+       // filtering logics included
+        $phonebooks = PhoneBook::where('ownerId', Auth::user()->id);
+
+        if($request->filled('favourite')) {
+            $phonebooks = $phonebooks->where('favourite', '1');
+        } else {
+            $phonebooks = $phonebooks->orWhere('status', '0');
+        }
+
+        $phonebooks = $phonebooks->orderBy('id', 'desc')->paginate(5);
+
+        return view('phonebook.index',compact('phonebooks'));
+
+
         
-        $phonebooks = PhoneBook::latest()
-                    ->where('status', '=', 0)
-                    ->orWhere('ownerId', '=', Auth::user()->id)
-                    ->paginate(5);
+        // $favourite = $request->query('favourite');
 
-
-
-        // $authId = auth()->user()->id;
+        // $phonebooks = PhoneBook::where(function ($query) use ($favourite){
+        //     if($favourite){
+        //         $query->where('favourite', $favourite);
+        //     }
+        // })->paginate();
+        // return view('phonebook.index',compact('phonebooks', 'favourite'));
         
-        // $phonebooks = PhoneBook::query()
-        //                 ->where('status', 0)
-        //                 ->orWhere('ownerId', $authId)
-        //                 ->paginate(5);
-    
-            
-        // // return $phonebooks;
-
-
-
-
-        // $phonebooks = PhoneBook::latest()
-        //     ->where('status', '=', 0)
-        //     ->orWhere('ownerId', '=', Auth::user()->id)
-        //     ->paginate(10);
 
         // dd('check');
-        return view('phonebook.index',compact('phonebooks'));
+        
     }
 
     public function store(Request $request){
