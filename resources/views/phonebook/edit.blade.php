@@ -187,6 +187,7 @@
                                 @enderror
                             </div>
                             <div class="">
+                                
                                 <div class="d-flex align-items-center input-group">
                                     <input type="checkbox" id="friend" name="friend" value="1" {{ old('friend', $editPhoneBookGroup->friend) == '1' ? 'checked' : '' }}>
                                     <label class="px-1 pt-1" for="friend">Mark as friend</label><br>

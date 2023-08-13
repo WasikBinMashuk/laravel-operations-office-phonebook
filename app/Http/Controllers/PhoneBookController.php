@@ -102,6 +102,12 @@ class PhoneBookController extends Controller
                 'phone_book_id' => $phoneBook -> id,
                 'friend' => $request->friend
             ]);
+        } else{
+            PhoneBookGroup::create([
+                'user_id' => Auth::user()->id,
+                'phone_book_id' => $phoneBook -> id,
+                'friend' => '0'
+            ]);
         }
         
 
@@ -118,6 +124,9 @@ class PhoneBookController extends Controller
         $editPhoneBooks = PhoneBook::where('id', $id)->first();
         $editPhoneBookGroup = PhoneBookGroup::where('phone_book_id', $id)->first(); // seeking group table for friend info
         // dd($editPhoneBookGroup);
+        // if ($editPhoneBookGroup == null){
+        //     dd('nnulllllll');
+        // }
         return view('phonebook.edit', compact('editPhoneBooks','phonebooks', 'editPhoneBookGroup'));
     }
 
