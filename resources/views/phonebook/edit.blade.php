@@ -154,7 +154,7 @@
 
                           {{-- checkbox section --}}
 
-                          <div class="mb-3">
+                          <div class="">
                             {{-- <label for="status" class="form-label">Status</label>
                             <select class="form-select" name="status" id="status">
                                 <option selected disabled>Select status</option>
@@ -171,7 +171,7 @@
                           </div>
 
                           @if ($editPhoneBooks->status == 1)
-                            <div class="mb-3">
+                            <div class="">
                                 {{-- <label for="favourite" class="form-label">favourite</label>
                                 <select class="form-select" name="favourite" id="favourite">
                                     <option selected disabled>Make favourite</option>
@@ -186,7 +186,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="mb-3">
+                            <div class="">
                                 <div class="d-flex align-items-center input-group">
                                     <input type="checkbox" id="friend" name="friend" value="1" {{ old('friend', $editPhoneBookGroup->friend) == '1' ? 'checked' : '' }}>
                                     <label class="px-1 pt-1" for="friend">Mark as friend</label><br>
