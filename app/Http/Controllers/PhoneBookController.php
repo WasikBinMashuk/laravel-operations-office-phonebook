@@ -115,13 +115,27 @@ class PhoneBookController extends Controller
     }
 
     public function edit($id){
+
         
-        $phonebooks = PhoneBook::latest()
-                    ->where('status', '=', 0)
+        
+        $phonebooks = PhoneBook::where('status', '=', 0)
                     ->orWhere('ownerId', '=', Auth::user()->id)
+                    ->orderBy('id', 'desc')
                     ->paginate(5);
 
+        // dd($phonebooks);
+        // if ($phonebooks->ownerId == Auth::user()->id) {
+        //     # code...
+        //     dd('error');
+        //     return Redirect()->back()->with('danger', 'Public and Favourite cannot be selecetd at the same time. TRY AGAIN!!!');
+        // }
         $editPhoneBooks = PhoneBook::where('id', $id)->first();
+        // dd($editPhoneBooks -> ownerId);
+
+        // cannot access public contacts using address bar
+        if($editPhoneBooks -> ownerId != Auth::user()->id){
+            return Redirect()->back()->with('danger', 'Permission Denied');
+        }
         $editPhoneBookGroup = PhoneBookGroup::where('phone_book_id', $id)->first(); // seeking group table for friend info
         // dd($editPhoneBookGroup);
         // if ($editPhoneBookGroup == null){
