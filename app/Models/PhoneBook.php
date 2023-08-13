@@ -10,5 +10,4 @@ class PhoneBook extends Model
     use HasFactory;
     protected $fillable = ['name', 'mobile', 'address', 'status', 'ownerId','favourite'];
 
-
 }

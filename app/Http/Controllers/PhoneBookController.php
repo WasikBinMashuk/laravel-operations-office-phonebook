@@ -19,16 +19,21 @@ class PhoneBookController extends Controller
     
     public function index(Request $request)
     {
-       // filtering logics included
+       // filtering logics included favourites and friends
         $phonebooks = PhoneBook::where('ownerId', Auth::user()->id);
+
 
         if($request->filled('favourite')) {
             $phonebooks = $phonebooks->where('favourite', '1');
-        } else {
+        } else if($request->filled('friend')) {
+            $phonebooks = $phonebooks->join('phone_book_groups', 'phone_books.id', 'phone_book_groups.phone_book_id')->select(['phone_books.*', 'phone_book_groups.friend'])->where('friend','1');
+        }
+        else {
             $phonebooks = $phonebooks->orWhere('status', '0');
         }
 
         $phonebooks = $phonebooks->orderBy('id', 'desc')->paginate(5);
+        // return $phonebooks;
 
         return view('phonebook.index',compact('phonebooks'));
 
@@ -104,37 +109,70 @@ class PhoneBookController extends Controller
     }
 
     public function edit($id){
-
+        
         $phonebooks = PhoneBook::latest()
                     ->where('status', '=', 0)
                     ->orWhere('ownerId', '=', Auth::user()->id)
                     ->paginate(5);
 
         $editPhoneBooks = PhoneBook::where('id', $id)->first();
-
-        return view('phonebook.edit', compact('editPhoneBooks','phonebooks'));
+        $editPhoneBookGroup = PhoneBookGroup::where('phone_book_id', $id)->first(); // seeking group table for friend info
+        // dd($editPhoneBookGroup);
+        return view('phonebook.edit', compact('editPhoneBooks','phonebooks', 'editPhoneBookGroup'));
     }
 
     public function update(Request $request){
+        // dd($request->all());
+
+        // Favourite-Public logic
+        $favourite = 0;
+        if ($request->status == "0" && $request->favourite == "1") {
+            $favourite = 0;
+            // dd('dada');
+            return Redirect()->back()->with('danger', 'Public and Favourite cannot be selecetd at the same time. TRY AGAIN!!!');
+        } 
+        if ($request->has('status') == true && $request->favourite == "0") {
+            $favourite = 0;
+            // dd('if 2');
+        }
+        if ($request->has('status') == false && $request->favourite == "1") {
+            $favourite = 1;
+            // dd('if 3');
+        }
 
         $request->validate([
             'name' => 'required',
             'mobile' => 'required|max:11',
             'address' => 'required',
-            'status' => 'required|in:0,1',
-            'favourite' => 'required|in:0,1',
+            'status' => 'nullable|in:0,1',
+            'favourite' => 'nullable|in:0,1',
         ]);
 
         $phonebook = PhoneBook::where('id', $request->id)->first();
-        
+        // dd('hmmm');
         $phonebook->update([
             'name' => $request->name,
             'mobile' => $request->mobile,
             'address' => $request->address,
-            'status' => $request->status ?? 0,
-            'favourite' => $request->favourite,
-            // 'ownerId' => $request->ownerId
+            'status' => $request->status ?? 1,
+            // 'ownerId' => Auth::user()->id,
+            // 'favourite' => $request->favourite ?? 0
+            'favourite' => $favourite
         ]);
+        if ($request->has('friend') == true) {
+            # code...
+            $editPhoneBookGroup = PhoneBookGroup::where('phone_book_id', $request->id)->first();
+            $editPhoneBookGroup->update([
+                'friend' => $request->friend
+            ]);
+        } else {
+            # code...
+            $editPhoneBookGroup = PhoneBookGroup::where('phone_book_id', $request->id)->first();
+            $editPhoneBookGroup->update([
+                'friend' => '0'
+            ]);
+        }
+        
 
         return redirect()->route('phonebook.index')->with('msg', 'Contact updated successfuly');
     }

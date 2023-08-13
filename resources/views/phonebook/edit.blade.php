@@ -13,9 +13,9 @@
                         <span style="float-right">Total <span class="badge text-bg-danger">{{ count($phonebooks) }}</span></span>
                     </div>
                     
-                    <div class="mt-2">
+                    {{-- <div class="mt-2">
                         <button type="button" class="btn btn-outline-warning mr-2"><a class="text-decoration-none text-warning" href="{{ route('phonebook.fav') }}">favourites</a></button>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="card-body">
@@ -23,6 +23,12 @@
                     @if (session('msg'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{{ Session::get('msg') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    @if (session('danger'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{ Session::get('danger') }}</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
@@ -145,30 +151,51 @@
                             @enderror
 
                           </div>
+
+                          {{-- checkbox section --}}
+
                           <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
+                            {{-- <label for="status" class="form-label">Status</label>
                             <select class="form-select" name="status" id="status">
                                 <option selected disabled>Select status</option>
                                 <option value="0" {{ old('status', $editPhoneBooks->status) == '0' ? 'selected' : '' }}>Public</option>
                                 <option value="1" {{ old('status', $editPhoneBooks->status) == '1' ? 'selected' : '' }} >Private</option>
-                              </select>
-                              @error('status')
+                              </select> --}}
+                              <div class=" align-items-center input-group">
+                                <input  type="checkbox" id="status" name="status" value="0" {{ old('status', $editPhoneBooks->status) == '0' ? 'checked' : '' }}> 
+                                <label class="px-1 pt-1" for="status">Public</label><br>
+                              </div>
+                                @error('status')
                                 <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                                @enderror
                           </div>
 
                           @if ($editPhoneBooks->status == 1)
                             <div class="mb-3">
-                                <label for="favourite" class="form-label">favourite</label>
+                                {{-- <label for="favourite" class="form-label">favourite</label>
                                 <select class="form-select" name="favourite" id="favourite">
                                     <option selected disabled>Make favourite</option>
                                     <option value="0" {{ old('favourite', $editPhoneBooks->favourite) == '0' ? 'selected' : '' }}>Unfavourite</option>
                                     <option value="1" {{ old('favourite', $editPhoneBooks->favourite) == '1' ? 'selected' : '' }} >Favourite</option>
-                                </select>
+                                </select> --}}
+                                <div class="d-flex align-items-center input-group">
+                                    <input type="checkbox" id="favourite" name="favourite" value="1" {{ old('favourite', $editPhoneBooks->favourite) == '1' ? 'checked' : '' }}>
+                                    <label class="px-1 pt-1" for="favourite">Favourite</label><br>
+                                </div>
                                 @error('favourite')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center input-group">
+                                    <input type="checkbox" id="friend" name="friend" value="1" {{ old('friend', $editPhoneBookGroup->friend) == '1' ? 'checked' : '' }}>
+                                    <label class="px-1 pt-1" for="friend">Mark as friend</label><br>
+                                </div>
+                                @error('friend')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            
                           @endif
                           
 
